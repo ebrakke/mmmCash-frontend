@@ -7,6 +7,18 @@ app.factory('User', function(config, $q, $http) {
         angular.extend(this, data);
     };
 
+    User.prototype.toData = function() {
+        return {
+            'userID': this.userID,
+            'name': this.name,
+            'email': this.email,
+            'phoneNumber': this.phoneNumber,
+            'amount': this.amount,
+            'online': this.online,
+            'credit': this.credit
+        };
+    };
+
     User.prototype.create = function() {
         var user = this;
         var deferred = $q.defer();

@@ -5,12 +5,32 @@ app.factory('Auth', function(config, $http, $location, $q, $localStorage, User) 
 
     var Auth = {};
 
+    Auth.user = null;
+
     Auth.getUser = function() {
-        return new User($localStorage.user);
+        return Auth.user;
     };
 
     Auth.setUser = function(user) {
         $localStorage.user = user;
+        Auth.user = new User($localStorage.user);
+    };
+
+    Auth.loadUser = function() {
+        Auth.user = new User($localStorage.user);
+    };
+
+    Auth.set = function(field, value) {
+        Auth.user[field] = value;
+        Auth.setUser(Auth.user.toData());
+    };
+
+    Auth.updateUser = function() {
+        var user = Auth.getUser();
+
+        User.get(user.userID).then(function(user) {
+            Auth.setUser(user.toData());
+        });
     };
 
     Auth.setToken = function(token) {
@@ -18,7 +38,13 @@ app.factory('Auth', function(config, $http, $location, $q, $localStorage, User) 
     };
 
     Auth.isLogged = function() {
-        return !!$localStorage.token && !!$localStorage.user;
+        if (!!$localStorage.token && !!$localStorage.user) {
+            Auth.loadUser();
+            return true;
+        } else {
+            Auth.user = null;
+            return false;
+        }
     };
 
     Auth.login = function(email, password) {

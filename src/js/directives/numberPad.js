@@ -29,7 +29,11 @@ app.directive('numberPad', function() {
 
             scope.getNumber = function() {
                 if (scope.selected.length === 0) {
-                    return 0;
+                    if (scope.number !== 0 && scope.number !== null && typeof scope.number !== 'undefined') {
+
+                    } else {
+                        return 0;
+                    }
                 } else {
                     return scope.selected.join('');
                 }

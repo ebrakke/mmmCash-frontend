@@ -2,14 +2,14 @@
 
 app.controller('TransactionCtrl', function($scope, $location, Transaction, Geolocation, Auth) {
     $scope.loading = false;
-    $scope.amount = 0;
-    $scope.online = false;
+    $scope.user = Auth.user;
+    console.log('user', Auth.user);
 
     $scope.requestMoney = function() {
         $scope.loading = true;
 
         var transaction = new Transaction();
-        transaction.amount = $scope.amount;
+        transaction.amount = Auth.amount;
 
         Geolocation.getLocation().then(function() {
             transaction.lat = Geolocation.getLatitude();
@@ -26,8 +26,9 @@ app.controller('TransactionCtrl', function($scope, $location, Transaction, Geolo
     $scope.goOnline = function() {
         $scope.loading = true;
 
-        Auth.getUser().goOnline($scope.amount).then(function() {
-            $scope.online = true;
+        Auth.getUser().goOnline(Auth.user.amount).then(function() {
+            Auth.set('online', true);
+            console.log('online', Auth.user.online);
             $scope.startSearchForTransactions();
         }).finally(function() {
             $scope.loading = false;
@@ -38,7 +39,8 @@ app.controller('TransactionCtrl', function($scope, $location, Transaction, Geolo
         $scope.loading = true;
 
         Auth.getUser().goOffline().then(function() {
-            $scope.online = false;
+            Auth.set('online', false);
+            console.log('offline', Auth.user);
             $scope.stopSearchForTransactions();
         }).finally(function() {
             $scope.loading = false;

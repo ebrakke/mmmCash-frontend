@@ -16,7 +16,7 @@
                 <span class="transaction__status__meetup" ng-if="transaction.fulfiller">
                     Please meet {{transaction.fulfiller.name}} <a ng-href="http://maps.google.com/maps?q={{transaction.fulfiller.lat}},{{transaction.fulfiller.lng}}" target="_blank">here</a>.
                 </span>
-                <span class="button--fullWidth button--white" ng-show="isWaitingForVerification() && isFulfiller()" ng-click="toggleVerify()">Enter Code</span>
+                <span class="button--fullWidth button--white" ng-show="isWaitingForVerification()" ng-click="toggleVerify()">Enter Code</span>
             </div>
         </div>
 

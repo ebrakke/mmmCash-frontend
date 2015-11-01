@@ -29,8 +29,8 @@ app.controller('TransactionDetailsCtrl', function($scope, $location, $routeParam
     $scope.verifyRequest = function() {
         $scope.loading = true;
 
-        $scope.transaction.verify($scope.code).then(function() {
-            Auth.updateUser();
+        $scope.transaction.verify($scope.code).then(function(t) {
+            Auth.setUser(t.requester);
             $location.path('/');
         }, function() {
             $scope.verifyError = true;
@@ -77,7 +77,10 @@ app.controller('TransactionDetailsCtrl', function($scope, $location, $routeParam
             $scope.transaction = t;
 
             if ($scope.transaction.status === 'complete') {
-                Auth.updateUser();
+                if (!$scope.isRequester()) {
+                    Auth.setUser(t.fulfiller);
+                }
+
                 $location.path('/');
             }
 

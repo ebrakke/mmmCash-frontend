@@ -23,6 +23,36 @@ app.factory('User', function(config, $q, $http) {
         return deferred.promise;
     };
 
+    User.prototype.goOnline = function(amount) {
+        var deferred = $q.defer();
+
+        $http.post(api + '/' + this.uid + '/online', {
+            'amount': amount
+        }).success(function(response) {
+            var data = response.data;
+
+            deferred.resolve(data);
+        }).error(function(error) {
+            deferred.reject(error.meta.err);
+        });
+
+        return deferred.promise;
+    };
+
+    User.prototype.goOffline = function() {
+        var deferred = $q.defer();
+
+        $http.post(api + '/' + this.uid + '/offline').success(function(response) {
+            var data = response.data;
+
+            deferred.resolve(data);
+        }).error(function(error) {
+            deferred.reject(error.meta.err);
+        });
+
+        return deferred.promise;
+    };
+
     User.get = function(id) {
         var deferred = $q.defer();
 

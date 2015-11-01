@@ -8,17 +8,23 @@
     <div class="transaction__amount">
         ${{amount}}
     </div>
-    <number-pad number="amount"></number-pad>
+    <div class="transaction__status" ng-show="online">
+        Waiting for users.
+    </div>
+    <number-pad number="amount" ng-if="!online"></number-pad>
 
     <div class="transaction__actions">
-        <ul class="list--horizontal grid--center" ng-show="!loading">
+        <ul class="list--horizontal grid--center" ng-show="!loading && !online">
             <li class="transaction__actions__action block-1-2">
                 <span class="button--fullWidth button--white" ng-click="requestMoney()">Request</span>
             </li><!--
             --><li class="transaction__actions__action block-1-2">
-                <span class="button--fullWidth button--white">Available</span>
+                <span class="button--fullWidth button--white" ng-click="goOnline()">Available</span>
             </li>
         </ul>
+        <div class="transaction__actions__action button--fullWidth button--white" ng-show="!loading && online" ng-click="goOffline()">
+            Go offline
+        </div>
         <div class="transaction__actions__action button--fullWidth button--white" ng-show="loading">
             <i class="fa fa-refresh fa-spin"></i>
         </div>

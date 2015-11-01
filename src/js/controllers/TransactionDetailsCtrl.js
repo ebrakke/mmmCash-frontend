@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('TransactionCtrl', function($scope, $routeParams, Transaction, Geolocation, Auth) {
+app.controller('TransactionDetailsCtrl', function($scope, $routeParams, Transaction, Geolocation, Auth) {
     $scope.loading = false;
     $scope.code = null;
     $scope.verify = false;

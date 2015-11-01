@@ -30,6 +30,7 @@ app.controller('TransactionDetailsCtrl', function($scope, $location, $routeParam
         $scope.loading = true;
 
         $scope.transaction.verify($scope.code).then(function() {
+            Auth.updateUser();
             $location.path('/');
         }, function() {
             $scope.verifyError = true;
@@ -75,7 +76,8 @@ app.controller('TransactionDetailsCtrl', function($scope, $location, $routeParam
         Transaction.get($routeParams.id).then(function(t) {
             $scope.transaction = t;
 
-            if ($scope.transaction.status === 'completed') {
+            if ($scope.transaction.status === 'complete') {
+                Auth.updateUser();
                 $location.path('/');
             }
 

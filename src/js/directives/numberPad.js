@@ -28,9 +28,7 @@ app.directive('numberPad', function() {
             };
 
             scope.getNumber = function() {
-                if (scope.transaction) {
-                    return scope.transaction.amount;
-                } else if (scope.selected.length === 0) {
+                if (scope.selected.length === 0) {
                     return 0;
                 } else {
                     return scope.selected.join('');

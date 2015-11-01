@@ -9,7 +9,7 @@ app.controller('TransactionCtrl', function($scope, $location, Transaction, Geolo
         $scope.loading = true;
 
         var transaction = new Transaction();
-        transaction.amount = $scope.user.amount;
+        transaction.amount = $scope.amount;
 
         Geolocation.getLocation().then(function() {
             transaction.lat = Geolocation.getLatitude();
@@ -26,7 +26,7 @@ app.controller('TransactionCtrl', function($scope, $location, Transaction, Geolo
     $scope.goOnline = function() {
         $scope.loading = true;
 
-        $scope.user.goOnline($scope.user.amount).then(function() {
+        $scope.user.goOnline($scope.amount).then(function() {
             $scope.startSearchForTransactions();
         }).finally(function() {
             $scope.loading = false;

@@ -29,17 +29,15 @@ app.directive('numberPad', function() {
 
             scope.getNumber = function() {
                 if (scope.selected.length === 0) {
-                    if (scope.number !== 0 && scope.number !== null && typeof scope.number !== 'undefined') {
-                        return scope.number;
-                    } else {
-                        return 0;
-                    }
+                    return 0;
                 } else {
                     return scope.selected.join('');
                 }
             };
 
-            scope.number = scope.getNumber();
+            if (scope.number !== 0) {
+                scope.select(scope.number);
+            }
         }
     };
 });

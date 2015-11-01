@@ -37,6 +37,36 @@ app.factory('Transaction', function(config, $q, $http) {
         return deferred.promise;
     };
 
+    Transaction.prototype.accept = function() {
+        var deferred = $q.defer();
+
+        $http.post(api + '/' + this.tid + '/accept').success(function(response) {
+            var data = response.data;
+
+            deferred.resolve(data);
+        }).error(function(error) {
+            deferred.reject(error.meta.err);
+        });
+
+        return deferred.promise;
+    };
+
+    Transaction.prototype.verify = function(code) {
+        var deferred = $q.defer();
+
+        $http.post(api + '/' + this.tid + '/verify', {
+            'code': code
+        }).success(function(response) {
+            var data = response.data;
+
+            deferred.resolve(data);
+        }).error(function(error) {
+            deferred.reject(error.meta.err);
+        });
+
+        return deferred.promise;
+    };
+
     Transaction.get = function(id) {
         var deferred = $q.defer();
 

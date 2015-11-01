@@ -21,11 +21,11 @@ app.factory('Auth', function(config, $http, $location, $q, $localStorage, User) 
         return !!$localStorage.token && !!$localStorage.user;
     };
 
-    Auth.login = function(username, password) {
+    Auth.login = function(email, password) {
         var deferred = $q.defer();
 
         $http.post(api, {
-            'username': username,
+            'email': email,
             'password': password
         }).success(function(response) {
             var data = response.data;

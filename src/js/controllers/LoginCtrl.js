@@ -8,7 +8,7 @@ app.controller('LoginCtrl', function($scope, $location, Auth) {
         $scope.loading = true;
 
         Auth.login(email, password).then(function() {
-            $location.path('/feed');
+            $location.path('/home');
         }, function(error) {
             $scope.error = error;
             $scope.loading = false;

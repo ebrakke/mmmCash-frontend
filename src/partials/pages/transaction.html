@@ -8,7 +8,10 @@
         ${{amount()}}
     </div>
     <div class="transaction__status" ng-if="transaction">
-        Your current transaction is {{transaction.status}}.
+        Your transaction is {{transaction.status}}.
+        <span class="transaction__status__meetup" ng-if="transaction.fulfiller">
+            Please meet {{transaction.fulfiller.name}} <a ng-href="http://maps.google.com/maps?q={{transaction.fulfiller.lat}},{{transaction.fulfiller.lng}}" target="_blank">here</a>.
+        </span>
     </div>
     <section class="transaction__numberPad" ng-if="!transaction">
         <div class="grid--center grid--gutter">
@@ -33,13 +36,14 @@
         </div>
     </section>
     <div class="transaction__actions">
-        <ul class="list--horizontal grid--center">
+        <ul class="list--horizontal grid--center" ng-hide="transaction">
             <li class="transaction__actions__action block-1-2">
-                <span class="button--fullWidth button--white">Request</span>
+                <span class="button--fullWidth button--white" ng-click="requestMoney()">Request</span>
             </li><!--
             --><li class="transaction__actions__action block-1-2">
                 <span class="button--fullWidth button--white">Available</span>
             </li>
         </ul>
+        <span class="transaction__actions__action button--fullWidth button--white" ng-show="transaction" ng-click="cancelRequest()">Cancel</span>
     </div>
 </div>

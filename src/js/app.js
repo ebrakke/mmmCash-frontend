@@ -3,5 +3,6 @@ var app = angular.module('hackathon', [
     'ngRoute',
     'ngSanitize',
     'ngAnimate',
-    'ngStorage'
+    'ngStorage',
+    'oauth'
 ]);

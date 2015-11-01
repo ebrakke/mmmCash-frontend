@@ -52,7 +52,7 @@ app.controller('TransactionDetailsCtrl', function($scope, $routeParams, Transact
     $scope.verifyRequest = function() {
         $scope.loading = true;
 
-        $scope.transaction.verify().then(function() {
+        $scope.transaction.verify($scope.code).then(function() {
             $scope.transaction = null;
             $scope.verify = false;
             $scope.code = null;

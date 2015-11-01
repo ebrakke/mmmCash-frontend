@@ -13,7 +13,7 @@ app.factory('User', function(config, $q, $http) {
 
         $http.post(api, user).success(function(response) {
             var data = response.data;
-            user.uid = data.user.uid;
+            user.userID = data.userID;
 
             deferred.resolve(data);
         }).error(function(error) {
@@ -26,7 +26,7 @@ app.factory('User', function(config, $q, $http) {
     User.prototype.goOnline = function(amount) {
         var deferred = $q.defer();
 
-        $http.post(api + '/' + this.uid + '/online', {
+        $http.post(api + '/' + this.userID + '/online', {
             'amount': amount
         }).success(function(response) {
             var data = response.data;
@@ -42,7 +42,7 @@ app.factory('User', function(config, $q, $http) {
     User.prototype.goOffline = function() {
         var deferred = $q.defer();
 
-        $http.post(api + '/' + this.uid + '/offline').success(function(response) {
+        $http.post(api + '/' + this.userID + '/offline').success(function(response) {
             var data = response.data;
 
             deferred.resolve(data);

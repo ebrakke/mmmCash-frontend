@@ -37,7 +37,7 @@ app.controller('TransactionDetailsCtrl', function($scope, $routeParams, Transact
         if ($scope.transaction.fulfiller === null) {
             return false;
         } else {
-            return $scope.transaction.fulfiller.uid === Auth.getUser().uid;
+            return $scope.transaction.fulfiller.userID === Auth.getUser().userID;
         }
     };
 

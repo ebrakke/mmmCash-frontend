@@ -9,8 +9,8 @@ app.controller('RegisterCtrl', function($scope, $location, User, Auth) {
         $scope.loading = true;
 
         $scope.user.create().then(function(data) {
-            Auth.setToken(data.bantrsAuth);
-            Auth.setUser(data.user);
+            Auth.setToken(data.authToken);
+            Auth.setUser(data);
 
             $location.path('/home');
         }, function(error) {

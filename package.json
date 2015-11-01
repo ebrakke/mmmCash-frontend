@@ -30,11 +30,5 @@
   },
   "engines": {
     "node": ">=0.10.0"
-  },
-  "scripts": {
-    "postrestore": [
-      "npm install",
-      "grunt dist"
-    ]
   }
 }

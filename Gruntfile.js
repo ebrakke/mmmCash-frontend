@@ -181,6 +181,14 @@ module.exports = function(grunt) {
                         'js/**/*.*',
                         'styles/fonts/**/*.*'
                     ]
+                }, {
+                    expand: true,
+                    dot: true,
+                    cwd: '<%= dirs.bower %>',
+                    dest: '<%= dirs.dist %>/bower_components',
+                    src: [
+                        '**/*.*'
+                    ]
                 }]
             },
             dev: {

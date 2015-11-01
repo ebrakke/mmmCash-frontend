@@ -2,6 +2,7 @@
 
 app.controller('TransactionDetailsCtrl', function($scope, $location, $routeParams, Transaction, Geolocation, Auth) {
     $scope.loading = false;
+    $scope.code = null;
     $scope.verify = false;
     $scope.verifyError = false;
 

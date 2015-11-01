@@ -32,6 +32,9 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "grunt dev"
+    "postrestore": [
+      "npm install",
+      "grunt dist"
+    ]
   }
 }

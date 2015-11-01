@@ -43,13 +43,13 @@
             ${{transaction.amount}}
         </div>
         <div class="transaction__status" ng-if="isWaitingToBeAccepted()">
-            <span class="transaction__status__meetup" ng-if="transaction.fulfiller">
+            <span class="transaction__status__meetup">
                 {{transaction.requester.name}} would like to request the above amount.
             </span>
         </div>
         <div class="transaction__status" ng-if="isWaitingForVerification()">
             Your code is 57645.
-            <span class="transaction__status__meetup" ng-if="transaction.fulfiller">
+            <span class="transaction__status__meetup">
                 {{transaction.requester.name}} will meet you shortly.
             </span>
         </div>

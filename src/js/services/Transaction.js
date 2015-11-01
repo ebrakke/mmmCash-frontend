@@ -51,6 +51,20 @@ app.factory('Transaction', function(config, $q, $http) {
         return deferred.promise;
     };
 
+    Transaction.prototype.deny = function() {
+        var deferred = $q.defer();
+
+        $http.post(api + '/' + this.tid + '/deny').success(function(response) {
+            var data = response.data;
+
+            deferred.resolve(data);
+        }).error(function(error) {
+            deferred.reject(error.meta.err);
+        });
+
+        return deferred.promise;
+    };
+
     Transaction.prototype.verify = function(code) {
         var deferred = $q.defer();
 

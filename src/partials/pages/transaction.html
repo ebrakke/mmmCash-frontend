@@ -5,26 +5,13 @@
         </ul>
     </header>
 
-    <div class="transaction__amount" ng-if="!verify">
+    <div class="transaction__amount">
         ${{amount}}
     </div>
-    <div class="transaction__status" ng-if="transaction && !verify">
-        Your transaction is {{transaction.status}}.
-        <span class="transaction__status__meetup" ng-if="transaction.fulfiller">
-            Please meet {{transaction.fulfiller.name}} <a ng-href="http://maps.google.com/maps?q={{transaction.fulfiller.lat}},{{transaction.fulfiller.lng}}" target="_blank">here</a>.
-        </span>
-        <span class="button--fullWidth button--white" ng-show="transaction" ng-click="toggleVerify()">Enter Code</span>
-    </div>
-    <number-pad number="amount" ng-hide="transaction"></number-pad>
+    <number-pad number="amount"></number-pad>
 
-    <div class="transaction__amount" ng-if="transaction && verify">
-        <span ng-show="code">{{code}}</span>
-        <span ng-hide="code">code</span>
-    </div>
-    <number-pad number="code" ng-show="transaction && verify"></number-pad>
-
-    <div class="transaction__actions" ng-show="!loading">
-        <ul class="list--horizontal grid--center" ng-hide="transaction">
+    <div class="transaction__actions">
+        <ul class="list--horizontal grid--center" ng-show="!loading">
             <li class="transaction__actions__action block-1-2">
                 <span class="button--fullWidth button--white" ng-click="requestMoney()">Request</span>
             </li><!--
@@ -32,15 +19,8 @@
                 <span class="button--fullWidth button--white">Available</span>
             </li>
         </ul>
-        <div class="transaction__actions__action button--fullWidth button--white" ng-show="transaction && !code" ng-click="cancelRequest()">Cancel</div>
-        <div class="transaction__actions__action button--fullWidth button--white" ng-show="transaction && code" ng-click="verifyRequest()">
-            <span ng-hide="verifyError">Verify</span>
-            <span ng-show="verifyError">Try Again</span>
-        </div>
-    </div>
-    <div class="transaction__actions" ng-show="loading">
-        <span class="transaction__actions__action button--fullWidth button--white">
+        <div class="transaction__actions__action button--fullWidth button--white" ng-show="loading">
             <i class="fa fa-refresh fa-spin"></i>
-        </span>
+        </div>
     </div>
 </div>

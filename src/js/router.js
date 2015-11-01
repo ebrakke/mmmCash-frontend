@@ -8,6 +8,9 @@ app.config(function($routeProvider, $httpProvider) {
     }).when('/home', {
         templateUrl: 'partials/pages/transaction.html',
         controller: 'TransactionCtrl'
+    }).when('/transaction/:id', {
+        templateUrl: 'partials/pages/transactionDetails.html',
+        controller: 'TransactionDetailsCtrl'
     }).when('/profile', {
         templateUrl: 'partials/pages/profile.html',
         controller: 'ProfileCtrl'

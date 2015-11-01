@@ -1,0 +1,75 @@
+<div class="transaction page">
+    <header class="header">
+        <ul>
+            <li class="header__item__icon"><a href="#/profile"><i class="fa fa-user"></i></a></li>
+        </ul>
+    </header>
+
+    <!-- What a requesting user sees -->
+    <div ng-if="!isFulfiller()">
+        <div ng-if="!verify">
+            <div class="transaction__amount">
+                ${{amount}}
+            </div>
+            <div class="transaction__status">
+                Your transaction is {{transaction.status}}.
+                <span class="transaction__status__meetup" ng-if="transaction.fulfiller">
+                    Please meet {{transaction.fulfiller.name}} <a ng-href="http://maps.google.com/maps?q={{transaction.fulfiller.lat}},{{transaction.fulfiller.lng}}" target="_blank">here</a>.
+                </span>
+                <span class="button--fullWidth button--white" ng-show="transaction" ng-click="toggleVerify()">Enter Code</span>
+            </div>
+        </div>
+
+        <div ng-if="verify">
+            <div class="transaction__amount">
+                <span ng-show="code">{{code}}</span>
+                <span ng-hide="code">code</span>
+            </div>
+            <number-pad number="code"></number-pad>
+        </div>
+
+        <div class="transaction__actions" ng-show="!loading">
+            <div class="transaction__actions__action button--fullWidth button--white" ng-show="!code" ng-click="cancelRequest()">Cancel</div>
+            <div class="transaction__actions__action button--fullWidth button--white" ng-show="code" ng-click="verifyRequest()">
+                <span ng-hide="verifyError">Verify</span>
+                <span ng-show="verifyError">Try Again</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- What a giving user sees -->
+    <div ng-if="isFulfiller()">
+        <div class="transaction__amount">
+            ${{transaction.amount}}
+        </div>
+        <div class="transaction__status" ng-if="isWaitingToBeAccepted()">
+            <span class="transaction__status__meetup" ng-if="transaction.fulfiller">
+                {{transaction.requester.name}} would like to request the above amount.
+            </span>
+        </div>
+        <div class="transaction__status" ng-if="isWaitingForVerification()">
+            Your code is 57645.
+            <span class="transaction__status__meetup" ng-if="transaction.fulfiller">
+                {{transaction.requester.name}} will meet you shortly.
+            </span>
+        </div>
+
+        <div class="transaction__actions" ng-show="!loading">
+            <ul class="list--horizontal grid--center" ng-show="isWaitingToBeAccepted()">
+                <li class="transaction__actions__action block-1-2">
+                    <span class="button--fullWidth button--white" ng-click="acceptRequest()">Accept</span>
+                </li><!--
+                --><li class="transaction__actions__action block-1-2">
+                    <span class="button--fullWidth button--white" ng-click="denyRequest()">Deny</span>
+                </li>
+            </ul>
+            <div class="transaction__actions__action button--fullWidth button--white" ng-show="isWaitingForVerification()" ng-click="cancelRequest()">Cancel</div>
+        </div>
+    </div>
+
+    <div class="transaction__actions" ng-show="loading">
+        <span class="transaction__actions__action button--fullWidth button--white">
+            <i class="fa fa-refresh fa-spin"></i>
+        </span>
+    </div>
+</div>

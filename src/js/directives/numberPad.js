@@ -34,6 +34,8 @@ app.directive('numberPad', function() {
                     return scope.selected.join('');
                 }
             };
+
+            scope.number = scope.getNumber();
         }
     };
 });

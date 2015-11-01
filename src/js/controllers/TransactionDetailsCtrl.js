@@ -9,11 +9,11 @@ app.controller('TransactionDetailsCtrl', function($scope, $location, $routeParam
         $scope.verify = true;
     };
 
-    $scope.isFulfiller = function() {
-        if (!$scope.transaction.fulfiller) {
+    $scope.isRequester = function() {
+        if (!$scope.transaction.requester) {
             return false;
         } else {
-            return $scope.transaction.fulfiller.userID === Auth.getUser().userID;
+            return $scope.transaction.requester.userID === Auth.getUser().userID;
         }
     };
 

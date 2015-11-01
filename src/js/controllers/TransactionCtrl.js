@@ -76,4 +76,8 @@ app.controller('TransactionCtrl', function($scope, $location, Transaction, Geolo
         // leaves the page.
         $scope.findTransaction = false;
     });
+
+    if ($scope.user.online) {
+        $scope.startSearchForTransactions();
+    }
 });

@@ -6,7 +6,7 @@
     </header>
 
     <!-- What a requesting user sees -->
-    <div ng-if="transaction && !isFulfiller()">
+    <div ng-if="transaction && isRequester()">
         <div ng-if="!verify">
             <div class="transaction__amount">
                 ${{transaction.amount}}
@@ -38,7 +38,7 @@
     </div>
 
     <!-- What a giving user sees -->
-    <div ng-if="transaction && isFulfiller()">
+    <div ng-if="transaction && !isRequester()">
         <div class="transaction__amount">
             ${{transaction.amount}}
         </div>

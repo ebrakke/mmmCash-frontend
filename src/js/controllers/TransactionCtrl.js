@@ -2,6 +2,7 @@
 
 app.controller('TransactionCtrl', function($scope, $location, Transaction, Geolocation, Auth) {
     $scope.loading = false;
+    $scope.amount = 0;
     $scope.user = Auth.getUser();
 
     $scope.requestMoney = function() {

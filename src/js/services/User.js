@@ -37,11 +37,14 @@ app.factory('User', function(config, $q, $http) {
 
     User.prototype.goOnline = function(amount) {
         var deferred = $q.defer();
+        var self = this;
 
         $http.post(api + '/' + this.userID + '/online', {
             'amount': amount
         }).success(function(response) {
             var data = response.data;
+            self.online = true;
+            self.amount = amount;
 
             deferred.resolve(data);
         }).error(function(error) {
@@ -53,9 +56,12 @@ app.factory('User', function(config, $q, $http) {
 
     User.prototype.goOffline = function() {
         var deferred = $q.defer();
+        var self = this;
 
         $http.post(api + '/' + this.userID + '/offline').success(function(response) {
             var data = response.data;
+            self.online = false;
+            self.amount = 0;
 
             deferred.resolve(data);
         }).error(function(error) {

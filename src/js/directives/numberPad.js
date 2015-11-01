@@ -30,7 +30,7 @@ app.directive('numberPad', function() {
             scope.getNumber = function() {
                 if (scope.selected.length === 0) {
                     if (scope.number !== 0 && scope.number !== null && typeof scope.number !== 'undefined') {
-
+                        return scope.number;
                     } else {
                         return 0;
                     }

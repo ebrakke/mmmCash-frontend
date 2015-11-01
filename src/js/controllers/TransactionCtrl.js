@@ -2,14 +2,13 @@
 
 app.controller('TransactionCtrl', function($scope, $location, Transaction, Geolocation, Auth) {
     $scope.loading = false;
-    $scope.user = Auth.user;
-    console.log('user', Auth.user);
+    $scope.user = Auth.getUser();
 
     $scope.requestMoney = function() {
         $scope.loading = true;
 
         var transaction = new Transaction();
-        transaction.amount = Auth.amount;
+        transaction.amount = $scope.user.amount;
 
         Geolocation.getLocation().then(function() {
             transaction.lat = Geolocation.getLatitude();
@@ -26,9 +25,7 @@ app.controller('TransactionCtrl', function($scope, $location, Transaction, Geolo
     $scope.goOnline = function() {
         $scope.loading = true;
 
-        Auth.getUser().goOnline(Auth.user.amount).then(function() {
-            Auth.set('online', true);
-            console.log('online', Auth.user.online);
+        $scope.user.goOnline($scope.user.amount).then(function() {
             $scope.startSearchForTransactions();
         }).finally(function() {
             $scope.loading = false;
@@ -38,9 +35,7 @@ app.controller('TransactionCtrl', function($scope, $location, Transaction, Geolo
     $scope.goOffline = function() {
         $scope.loading = true;
 
-        Auth.getUser().goOffline().then(function() {
-            Auth.set('online', false);
-            console.log('offline', Auth.user);
+        $scope.user.goOffline().then(function() {
             $scope.stopSearchForTransactions();
         }).finally(function() {
             $scope.loading = false;
@@ -59,13 +54,11 @@ app.controller('TransactionCtrl', function($scope, $location, Transaction, Geolo
 
     // Method to continually search for a transaction.
     var searchForTransaction = function() {
-        console.log('[searching]');
-
         Geolocation.getLocation().then(function() {
-            var lat = Geolocation.getLatitude();
-            var lng = Geolocation.getLongitude();
+            // var lat = Geolocation.getLatitude();
+            // var lng = Geolocation.getLongitude();
 
-            console.log(lat, lng);
+            // console.log(lat, lng);
 
             // Recursively search.
             if ($scope.findTransaction) {

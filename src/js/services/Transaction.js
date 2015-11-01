@@ -81,6 +81,22 @@ app.factory('Transaction', function(config, $q, $http) {
         return deferred.promise;
     };
 
+    Transaction.search = function(lat, lng) {
+        var deferred = $q.defer();
+
+        $http.get(api + '/search?lat=' + lat + '&lng=' + lng).success(function(response) {
+            if (response.data) {
+                deferred.resolve(new Transaction(response.data));
+            } else {
+                deferred.resolve(null);
+            }
+        }).error(function(error) {
+            deferred.reject(error.meta.err);
+        });
+
+        return deferred.promise;
+    };
+
     Transaction.get = function(id) {
         var deferred = $q.defer();
 

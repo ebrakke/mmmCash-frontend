@@ -55,15 +55,19 @@ app.controller('TransactionCtrl', function($scope, $location, Transaction, Geolo
     // Method to continually search for a transaction.
     var searchForTransaction = function() {
         Geolocation.getLocation().then(function() {
-            // var lat = Geolocation.getLatitude();
-            // var lng = Geolocation.getLongitude();
+            var lat = Geolocation.getLatitude();
+            var lng = Geolocation.getLongitude();
 
-            // console.log(lat, lng);
+            Transaction.search(lat, lng).then(function(t) {
+                if (t) {
+                    $location.path('/transaction/' + t.tID);
+                }
 
-            // Recursively search.
-            if ($scope.findTransaction) {
-                searchForTransaction();
-            }
+                // Recursively search.
+                if ($scope.findTransaction) {
+                    searchForTransaction();
+                }
+            });
         });
     };
 

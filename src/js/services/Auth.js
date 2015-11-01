@@ -22,6 +22,10 @@ app.factory('Auth', function(config, $http, $location, $q, $localStorage, User) 
     };
 
     Auth.updateUser = function() {
+        if (Object.keys(Auth.getUser()).length === 0) {
+            return;
+        }
+
         User.get(Auth.getUser().userID).then(function(user) {
             Auth.setUser(user.toData());
         });

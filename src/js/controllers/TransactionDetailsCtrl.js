@@ -2,7 +2,7 @@
 
 app.controller('TransactionDetailsCtrl', function($scope, $location, $routeParams, Transaction, Geolocation, Auth) {
     $scope.loading = false;
-    $scope.code = null;
+    $scope.code = 0;
     $scope.verify = false;
     $scope.verifyError = false;
 
@@ -30,10 +30,7 @@ app.controller('TransactionDetailsCtrl', function($scope, $location, $routeParam
         $scope.loading = true;
 
         $scope.transaction.verify($scope.code).then(function() {
-            $scope.transaction = null;
-            $scope.verify = false;
-            $scope.code = null;
-            $scope.amount = 0;
+            $location.path('/');
         }, function() {
             $scope.verifyError = true;
         }).finally(function() {
@@ -77,6 +74,10 @@ app.controller('TransactionDetailsCtrl', function($scope, $location, $routeParam
     var fetchTransaction = function() {
         Transaction.get($routeParams.id).then(function(t) {
             $scope.transaction = t;
+
+            if ($scope.transaction.status === 'completed') {
+                $location.path('/');
+            }
 
             // Recursively check status.
             if ($scope.checkTransaction) {

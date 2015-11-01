@@ -3,7 +3,7 @@
 app.controller('TransactionCtrl', function($scope, $location, Transaction, Geolocation, Auth) {
     $scope.loading = false;
     $scope.amount = 0;
-    $scope.online = true;
+    $scope.online = false;
 
     $scope.requestMoney = function() {
         $scope.loading = true;

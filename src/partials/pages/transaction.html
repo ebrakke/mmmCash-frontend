@@ -11,7 +11,7 @@
     <div class="transaction__status" ng-show="online">
         Waiting for users.
     </div>
-    <number-pad number="amount" ng-if="!online"></number-pad>
+    <number-pad number="amount" ng-show="!online"></number-pad>
 
     <div class="transaction__actions">
         <ul class="list--horizontal grid--center" ng-show="!loading && !online">

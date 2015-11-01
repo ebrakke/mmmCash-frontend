@@ -29,8 +29,8 @@
         </div>
 
         <div class="transaction__actions" ng-show="!loading">
-            <!-- <div class="transaction__actions__action button--fullWidth button--white" ng-show="!code" ng-click="cancelRequest()">Cancel</div> -->
-            <div class="transaction__actions__action button--fullWidth button--white" ng-click="verifyRequest()">
+            <div class="transaction__actions__action button--fullWidth button--white" ng-show="!code" ng-click="cancelRequest()">Cancel</div>
+            <div class="transaction__actions__action button--fullWidth button--white" ng-show="code" ng-click="verifyRequest()">
                 <span ng-hide="verifyError">Verify</span>
                 <span ng-show="verifyError">Try Again</span>
             </div>

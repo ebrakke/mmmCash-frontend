@@ -19,11 +19,11 @@ app.controller('TransactionDetailsCtrl', function($scope, $location, $routeParam
     };
 
     $scope.isWaitingToBeAccepted = function() {
-        return $scope.transaction.status === 'pending';
+        return $scope.transaction && $scope.transaction.status === 'pending';
     };
 
     $scope.isWaitingForVerification = function() {
-        return $scope.transaction.status === 'accepted';
+        return $scope.transaction && $scope.transaction.status === 'accepted';
     };
 
     $scope.verifyRequest = function() {

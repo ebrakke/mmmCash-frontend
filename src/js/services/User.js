@@ -35,6 +35,10 @@ app.factory('User', function(config, $q, $http) {
         return deferred.promise;
     };
 
+    User.prototype.update = function(data) {
+        angular.extend(this, data);
+    };
+
     User.prototype.goOnline = function(amount) {
         var deferred = $q.defer();
         var self = this;

@@ -13,7 +13,12 @@ app.factory('Auth', function(config, $http, $location, $q, $localStorage, User) 
 
     Auth.setUser = function(user) {
         $localStorage.user = user;
-        Auth.user = new User(user);
+
+        if (Auth.user) {
+            Auth.user.update(user);
+        } else {
+            Auth.user = new User(user);
+        }
     };
 
     Auth.updateUser = function() {

@@ -36,7 +36,11 @@ app.directive('numberPad', function() {
             };
 
             if (scope.number !== 0) {
-                scope.select(scope.number);
+                var numbers = scope.number.split('');
+
+                numbers.forEach(function(n) {
+                    scope.select(n);
+                });
             }
         }
     };

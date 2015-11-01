@@ -54,7 +54,7 @@ app.controller('TransactionDetailsCtrl', function($scope, $location, $routeParam
         $scope.loading = true;
 
         $scope.transaction.deny().then(function() {
-
+            $location.path('/');
         }).finally(function() {
             $scope.loading = false;
         });

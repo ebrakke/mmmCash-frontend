@@ -47,8 +47,7 @@ app.factory('User', function(config, $q, $http) {
             'amount': amount
         }).success(function(response) {
             var data = response.data;
-            self.online = true;
-            self.amount = amount;
+            self.update(data);
 
             deferred.resolve(data);
         }).error(function(error) {
@@ -64,8 +63,7 @@ app.factory('User', function(config, $q, $http) {
 
         $http.post(api + '/' + this.userID + '/offline').success(function(response) {
             var data = response.data;
-            self.online = false;
-            self.amount = 0;
+            self.update(data);
 
             deferred.resolve(data);
         }).error(function(error) {

@@ -13,7 +13,7 @@ app.factory('Transaction', function(config, $q, $http) {
 
         $http.post(api, transaction).success(function(response) {
             var data = response.data;
-            transaction.tid = data.transaction.tid;
+            transaction.tID = data.tID;
 
             deferred.resolve(data);
         }).error(function(error) {
@@ -26,7 +26,7 @@ app.factory('Transaction', function(config, $q, $http) {
     Transaction.prototype.cancel = function() {
         var deferred = $q.defer();
 
-        $http.delete(api + '/' + this.tid).success(function(response) {
+        $http.delete(api + '/' + this.tID).success(function(response) {
             var data = response.data;
 
             deferred.resolve(data);
@@ -40,7 +40,7 @@ app.factory('Transaction', function(config, $q, $http) {
     Transaction.prototype.accept = function() {
         var deferred = $q.defer();
 
-        $http.post(api + '/' + this.tid + '/accept').success(function(response) {
+        $http.post(api + '/' + this.tID + '/accept').success(function(response) {
             var data = response.data;
 
             deferred.resolve(data);
@@ -54,7 +54,7 @@ app.factory('Transaction', function(config, $q, $http) {
     Transaction.prototype.deny = function() {
         var deferred = $q.defer();
 
-        $http.post(api + '/' + this.tid + '/deny').success(function(response) {
+        $http.post(api + '/' + this.tID + '/deny').success(function(response) {
             var data = response.data;
 
             deferred.resolve(data);
@@ -68,7 +68,7 @@ app.factory('Transaction', function(config, $q, $http) {
     Transaction.prototype.verify = function(code) {
         var deferred = $q.defer();
 
-        $http.post(api + '/' + this.tid + '/verify', {
+        $http.post(api + '/' + this.tID + '/verify', {
             'code': code
         }).success(function(response) {
             var data = response.data;

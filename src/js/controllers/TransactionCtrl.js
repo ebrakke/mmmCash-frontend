@@ -15,7 +15,7 @@ app.controller('TransactionCtrl', function($scope, $location, Transaction, Geolo
             transaction.lng = Geolocation.getLongitude();
 
             transaction.create().then(function(transaction) {
-                $location.path('/transaction/' + transaction.tid);
+                $location.path('/transaction/' + transaction.tID);
             }).finally(function() {
                 $scope.loading = false;
             });

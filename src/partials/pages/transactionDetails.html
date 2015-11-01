@@ -9,14 +9,14 @@
     <div ng-if="transaction && !isFulfiller()">
         <div ng-if="!verify">
             <div class="transaction__amount">
-                ${{amount}}
+                ${{transaction.amount}}
             </div>
             <div class="transaction__status">
                 Your transaction is {{transaction.status}}.
                 <span class="transaction__status__meetup" ng-if="transaction.fulfiller">
                     Please meet {{transaction.fulfiller.name}} <a ng-href="http://maps.google.com/maps?q={{transaction.fulfiller.lat}},{{transaction.fulfiller.lng}}" target="_blank">here</a>.
                 </span>
-                <span class="button--fullWidth button--white" ng-show="transaction" ng-click="toggleVerify()">Enter Code</span>
+                <span class="button--fullWidth button--white" ng-show="isWaitingForVerification() && isFulfiller()" ng-click="toggleVerify()">Enter Code</span>
             </div>
         </div>
 

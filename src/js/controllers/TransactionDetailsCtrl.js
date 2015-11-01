@@ -1,34 +1,16 @@
 'use strict';
 
-app.controller('TransactionDetailsCtrl', function($scope, $routeParams, Transaction, Geolocation, Auth) {
+app.controller('TransactionDetailsCtrl', function($scope, $location, $routeParams, Transaction, Geolocation, Auth) {
     $scope.loading = false;
-    $scope.code = null;
     $scope.verify = false;
     $scope.verifyError = false;
-    // $scope.transaction = new Transaction({
-    //     'tid': 1,
-    //     'amount': 20,
-    //     'status': 'pending',
-    //     'fulfiller': {
-    //         // 'uid': 1,
-    //         'name': 'Tyler W',
-    //         'lat': 42.3465898,
-    //         'lng': -71.1048371
-    //     },
-    //     'requester': {
-    //         // 'uid': 1,
-    //         'name': 'Erik B',
-    //         'lat': 42.3465898,
-    //         'lng': -71.1048371
-    //     }
-    // });
 
     $scope.toggleVerify = function() {
         $scope.verify = true;
     };
 
     $scope.isFulfiller = function() {
-        if ($scope.transaction.fulfiller === null) {
+        if (!$scope.transaction.fulfiller) {
             return false;
         } else {
             return $scope.transaction.fulfiller.userID === Auth.getUser().userID;
@@ -83,6 +65,7 @@ app.controller('TransactionDetailsCtrl', function($scope, $routeParams, Transact
 
         $scope.transaction.cancel().then(function() {
             $scope.transaction = null;
+            $location.path('/');
         }).finally(function() {
             $scope.loading = false;
         });

@@ -34,14 +34,6 @@ app.directive('numberPad', function() {
                     return scope.selected.join('');
                 }
             };
-
-            if (scope.number !== 0) {
-                var numbers = scope.number.split('');
-
-                numbers.forEach(function(n) {
-                    scope.select(n);
-                });
-            }
         }
     };
 });

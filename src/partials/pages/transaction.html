@@ -5,7 +5,7 @@
         </ul>
     </header>
 
-    <div class="transaction__amount" ng-if="transaction && !verify">
+    <div class="transaction__amount" ng-if="!verify">
         ${{amount}}
     </div>
     <div class="transaction__status" ng-if="transaction && !verify">
@@ -23,7 +23,7 @@
     </div>
     <number-pad number="code" ng-show="transaction && verify"></number-pad>
 
-    <div class="transaction__actions">
+    <div class="transaction__actions" ng-show="!loading">
         <ul class="list--horizontal grid--center" ng-hide="transaction">
             <li class="transaction__actions__action block-1-2">
                 <span class="button--fullWidth button--white" ng-click="requestMoney()">Request</span>
@@ -32,7 +32,15 @@
                 <span class="button--fullWidth button--white">Available</span>
             </li>
         </ul>
-        <span class="transaction__actions__action button--fullWidth button--white" ng-show="transaction && !code" ng-click="cancelRequest()">Cancel</span>
-        <span class="transaction__actions__action button--fullWidth button--white" ng-show="transaction && code" ng-click="verifyRequest()">Verify</span>
+        <div class="transaction__actions__action button--fullWidth button--white" ng-show="transaction && !code" ng-click="cancelRequest()">Cancel</div>
+        <div class="transaction__actions__action button--fullWidth button--white" ng-show="transaction && code" ng-click="verifyRequest()">
+            <span ng-hide="verifyError">Verify</span>
+            <span ng-show="verifyError">Try Again</span>
+        </div>
+    </div>
+    <div class="transaction__actions" ng-show="loading">
+        <span class="transaction__actions__action button--fullWidth button--white">
+            <i class="fa fa-refresh fa-spin"></i>
+        </span>
     </div>
 </div>

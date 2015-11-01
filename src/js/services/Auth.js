@@ -30,7 +30,7 @@ app.factory('Auth', function(config, $http, $location, $q, $localStorage, User) 
         }).success(function(response) {
             var data = response.data;
             Auth.setToken(data.authToken);
-            Auth.setUser(data.user);
+            Auth.setUser(data);
 
             deferred.resolve();
         }).error(function(error) {

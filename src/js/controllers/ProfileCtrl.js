@@ -1,5 +1,9 @@
 'use strict';
 
-app.controller('ProfileCtrl', function($scope) {
-    console.log($scope);
+app.controller('ProfileCtrl', function($scope, Auth) {
+    $scope.user = Auth.getUser();
+
+    $scope.logout = function() {
+        Auth.logout();
+    };
 });

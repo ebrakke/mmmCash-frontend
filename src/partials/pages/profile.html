@@ -2,11 +2,11 @@
     <header class="header">
         <ul>
             <li class="header__item header__item__icon" back-button><i class="fa fa-angle-left"></i></li>
-            <li class="header__item">Tyler Waltze</li>
+            <li class="header__item">{{user.name}}</li>
         </ul>
     </header>
     <div class="list--inset">
-        <h4 class="list--inset__title">Credit</h4>
+        <h4 class="list--inset__title">Karma</h4>
         <div class="list--inset__item">
             $100
         </div>
@@ -28,4 +28,5 @@
 
         </div>
     </div>
+    <div class="button--red button--fullWidth" ng-click="logout()">logout</div>
 </div>

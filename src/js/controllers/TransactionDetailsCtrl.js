@@ -5,28 +5,22 @@ app.controller('TransactionDetailsCtrl', function($scope, $routeParams, Transact
     $scope.code = null;
     $scope.verify = false;
     $scope.verifyError = false;
-    $scope.transaction = new Transaction({
-        'tid': 1,
-        'amount': 20,
-        'status': 'pending',
-        'fulfiller': {
-            // 'uid': 1,
-            'name': 'Tyler W',
-            'lat': 42.3465898,
-            'lng': -71.1048371
-        },
-        'requester': {
-            // 'uid': 1,
-            'name': 'Erik B',
-            'lat': 42.3465898,
-            'lng': -71.1048371
-        }
-    });
-
-    // Transaction.get($routeParams.tid).then(function(t) {
-    //     $scope.transaction = t;
-    // }).finally(function() {
-    //     $scope.loading = false;
+    // $scope.transaction = new Transaction({
+    //     'tid': 1,
+    //     'amount': 20,
+    //     'status': 'pending',
+    //     'fulfiller': {
+    //         // 'uid': 1,
+    //         'name': 'Tyler W',
+    //         'lat': 42.3465898,
+    //         'lng': -71.1048371
+    //     },
+    //     'requester': {
+    //         // 'uid': 1,
+    //         'name': 'Erik B',
+    //         'lat': 42.3465898,
+    //         'lng': -71.1048371
+    //     }
     // });
 
     $scope.toggleVerify = function() {
@@ -93,4 +87,25 @@ app.controller('TransactionDetailsCtrl', function($scope, $routeParams, Transact
             $scope.loading = false;
         });
     };
+
+    // Method to continually check transaction status.
+    $scope.checkTransaction = true;
+    var fetchTransaction = function() {
+        Transaction.get($routeParams.id).then(function(t) {
+            $scope.transaction = t;
+
+            // Recursively check status.
+            if ($scope.checkTransaction) {
+                fetchTransaction();
+            }
+        });
+    };
+
+    $scope.$on('$destroy', function() {
+        // Stop loading comments when the user
+        // leaves the page.
+        $scope.checkTransaction = false;
+    });
+
+    fetchTransaction();
 });
